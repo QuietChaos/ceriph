@@ -2,12 +2,11 @@
 import subprocess
 import sys
 import os
-import datetime
 
 
-def scanip(now, line):
+def scanip(line):
     print(('[-] Scanning ' + line.strip('\n')))
-    subprocess.call(["unicornscan", line.strip('\n')])
+    subprocess.call(["unicornscan", "-l test.log ", line.strip('\n')])
 
 
 def main():
@@ -32,11 +31,10 @@ def main():
     except:
         print("unicornscan - No such file")
         return
-    now = datetime.datetime.now()
-    subprocess.call(["mkdir", now.strftime("%Y-%m-%d %H:%M")])
+    subprocess.call(["mkdir", "udir"])
     ip = open(scanfile, 'r')
     for line in ip.readlines():
-        scanip(now, line)
+        scanip(line)
 
 
 if __name__ == "__main__":
